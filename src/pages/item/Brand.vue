@@ -26,10 +26,10 @@
         </td>
         <td class="text-xs-center">{{ props.item.letter }}</td>
         <td class="justify-center layout px-0">
-          <v-btn icon @click="editBrand(props.item)">
+          <v-btn icon color="info" @click="editBrand(props.item)">
             <i class="el-icon-edit"/>
           </v-btn>
-          <v-btn icon @click="deleteBrand(props.item)">
+          <v-btn icon color = "info" @click="deleteBrand(props.item)">
             <i class="el-icon-delete"/>
           </v-btn>
         </td>
@@ -122,6 +122,10 @@
         this.show = true;
         // 把oldBrand变为null
         this.oldBrand = null;
+      },
+      deleteBrand(Brand){
+        this.$http.get("/item/brand/delete/" + Brand.id)
+        location.reload();
       },
       editBrand(oldBrand){
         // 根据品牌信息查询商品分类
