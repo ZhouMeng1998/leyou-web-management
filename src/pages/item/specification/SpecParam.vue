@@ -14,10 +14,10 @@
                 <td class="text-xs-center">{{ formatBoolean(props.item.generic) }}</td>
                 <td class="text-xs-center">{{ formatBoolean(props.item.searching) }}</td>
                 <td class="justify-center layout px-0">
-                <v-btn icon @click="editParam(props.item)">
+                <v-btn icon color="info" @click="editParam(props.item)">
                     <i class="el-icon-edit"/>
                 </v-btn>
-                <v-btn icon @click="deleteParam(props.item.id)">
+                <v-btn icon color="info" @click="deleteParam(props.item.id)">
                     <i class="el-icon-delete"/>
                 </v-btn>
                 </td>
@@ -155,6 +155,7 @@ export default {
         .then(() => {
             this.$http.delete("/item/spec/param/" + id)
             .then(() => {
+                this.loadData();
                 this.$message.success("删除成功");
             })
             .catch(() => {
@@ -172,7 +173,8 @@ export default {
         this.$http({
             method: this.isEdit ? 'put' : 'post',
             url: '/item/spec/param',
-            data: p,
+            // data: p,
+            data: this.$qs.stringify(p),
         }).then(() => {
             // 关闭窗口
             this.show = false;

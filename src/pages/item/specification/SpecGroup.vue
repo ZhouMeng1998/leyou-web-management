@@ -1,5 +1,5 @@
 <template>
-    <div>   
+    <div>
         <v-data-table
         :headers="headers"
         :items="groups"
@@ -7,7 +7,7 @@
         class="elevation-0"
         >
             <template slot="items" slot-scope="props">
-                <tr @click="selectGroup(props.item)">     
+                <tr @click="selectGroup(props.item)">
                     <td class="text-xs-center">{{ props.item.id }}</td>
                     <td class="text-xs-center">{{ props.item.name }}</td>
                     <td class="justify-center layout px-0">
@@ -24,7 +24,7 @@
                 该分类下暂无规格组或尚未选择分类
             </template>
         </v-data-table>
-        
+
         <v-btn color='primary' @click="addGroup">新增分组</v-btn>
         <v-dialog v-model="show" width="300" height="200">
         <v-card >
@@ -64,13 +64,14 @@ export default {
     };
   },
   watch:{
-      cid(){
+      cid(){ //监视cid的变化，specification第11行表示如果点击的当前节点为叶子节点，
+        // cid就会发生变化，从而触发loadData()函数
           this.loadData();
       }
   },
   methods:{
       loadData(){
-          this.$http.get("/item/spec/groups/" + this.cid)
+          this.$http.get("/item/spec/groups/" + this.cid) //查询对应的规格组数据并展示
           .then(({data}) => {
               this.groups = data;
           })
