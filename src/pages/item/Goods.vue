@@ -94,7 +94,7 @@
           search: '', // 搜索过滤字段
         },
         totalGoods: 0, // 总条数
-        goodsList: [], // 当前页品牌数据
+        goodsList: [], // 当前页品牌数据--->即数据
         loading: true, // 是否在加载中
         pagination: {}, // 分页信息
         headers: [
@@ -110,10 +110,10 @@
         step: 1, // 子组件中的步骤线索引，默认为1
       }
     },
-    mounted() { // 渲染后执行
+    /*mounted() { // 渲染后执行-------->钩子函数，因为下面有监听了，所以这里把钩子函数干掉
       // 查询数据
       this.getDataFromServer();
-    },
+    },*/
     watch: {
       pagination: { // 监视pagination属性的变化
         deep: true, // deep为true，会监视pagination的属性及属性中的对象属性变化
